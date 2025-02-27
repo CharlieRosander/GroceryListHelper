@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}GroceryList - Organized List{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h2 class="h4 mb-0"><i class="fas fa-check-circle me-2"></i>Organized Grocery List</h2>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success mb-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Success!</strong> Your grocery list has been organized according to your store layout.
+                </div>
+                
+                <div class="card bg-light">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="h5 mb-0">Your Organized List</h3>
+                        <button class="btn btn-sm btn-outline-primary" onclick="printList()">
+                            <i class="fas fa-print me-1"></i> Print List
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="organized-list-content" class="bg-white p-3 border rounded">
+                            <pre class="mb-0" style="white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{ organized_list }}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('upload_list') }}" class="btn btn-primary">
+                        <i class="fas fa-upload me-1"></i> Upload Another List
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-home me-1"></i> Back to Categories
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function printList() {
+        const listContent = document.getElementById('organized-list-content').innerText;
+        const printWindow = window.open('', '_blank');
+        
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Grocery List</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                        h1 { text-align: center; margin-bottom: 20px; }
+                        pre { white-space: pre-wrap; font-family: inherit; }
+                    </style>
+                </head>
+                <body>
+                    <h1>My Organized Grocery List</h1>
+                    <pre>${listContent}</pre>
+                </body>
+            </html>
+        `);
+        
+        printWindow.document.close();
+        printWindow.focus();
+        setTimeout(() => { printWindow.print(); }, 250);
+    }
+</script>
+{% endblock %}

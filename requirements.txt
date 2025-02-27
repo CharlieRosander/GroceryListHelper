@@ -1,0 +1,7 @@
+Flask
+flask_sqlalchemy
+Flask-Session
+openai
+Pillow
+python-dotenv
+Requests
