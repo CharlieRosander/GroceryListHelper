@@ -1,4 +1,4 @@
-# GroceryList Application
+# GroceryListHelper Application
 
 ## Overview
 GroceryList is a web application that helps users organize their grocery lists using AI. The application takes a grocery list (e.g., written on a whiteboard), processes it using ChatGPT, and reorganizes the items according to the layout of the user's preferred store.
